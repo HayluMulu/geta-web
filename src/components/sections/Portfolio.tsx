@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
+import { useAudioInView } from "@/hooks/use-audio-in-view";
+import { useState, useEffect } from "react";
 
 const projects = [
   {
@@ -23,24 +25,66 @@ const projects = [
 ];
 
 const Portfolio = () => {
+  // Audio hook - plays from 1:51 (111 seconds) to 2:00 (120 seconds)
+  const { elementRef: audioSectionRef, isIntersecting } = useAudioInView({
+    audioSrc: '/assets/music.mp3',
+    startTime: 111, // 1:51 in seconds
+    endTime: 120,   // 2:00 in seconds
+    threshold: 0.5,
+  });
+
+  const [hasBeenViewed, setHasBeenViewed] = useState(false);
+
+  // Once the section is viewed, keep the title changed
+  useEffect(() => {
+    if (isIntersecting && !hasBeenViewed) {
+      setHasBeenViewed(true);
+    }
+  }, [isIntersecting, hasBeenViewed]);
+
   return (
-    <section className="relative py-24 px-6">
+    <section 
+      id="portfolio"
+      ref={audioSectionRef}
+      className="relative py-24 px-6"
+    >
       <div className="container relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            העבודות שלנו
-          </h2>
-          <p className="text-foreground-muted max-w-xl mx-auto">
-            פרויקטים נבחרים שמציגים את הסגנון והאיכות שלנו
-          </p>
-        </motion.div>
+        {hasBeenViewed ? (
+          <motion.div
+            className="title-container"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <h2 className="title-text">
+              THEY <span className="title-text-gradient">NOT</span> LIKE US
+            </h2>
+            <motion.div
+              className="title-underline"
+              initial={{ width: 0 }}
+              whileInView={{ width: '100%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 }}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+              העבודות שלנו
+            </h2>
+            <p className="text-foreground-muted max-w-xl mx-auto">
+              פרויקטים נבחרים שמציגים את הסגנון והאיכות שלנו
+            </p>
+          </motion.div>
+        )}
         
         {/* Portfolio Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

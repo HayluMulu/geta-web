@@ -32,7 +32,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-foreground-muted">אימייל</p>
-                  <p className="text-foreground">hello@cosmicstudio.co.il</p>
+                  <p className="text-foreground">getashow123@gmail.com</p>
                 </div>
               </div>
               
@@ -42,7 +42,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-sm text-foreground-muted">טלפון</p>
-                  <p className="text-foreground">03-123-4567</p>
+                  <p className="text-foreground">055-687-4515 </p>
                 </div>
               </div>
               

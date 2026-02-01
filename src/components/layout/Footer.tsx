@@ -23,7 +23,7 @@ const Footer = () => {
           
           {/* Copyright */}
           <p className="text-sm text-foreground-muted">
-            © 2026 Cosmic Studio. כל הזכויות שמורות.
+            © 2026 Geta Show. כל הזכויות שמורות.
           </p>
         </div>
       </div>

@@ -12,7 +12,7 @@ const Header = () => {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="font-display text-xl font-bold text-foreground">
-          <span className="text-gradient-cosmic">Cosmic</span> Studio
+          <span className="text-gradient-cosmic">Geta</span> Show
         </a>
         
         {/* Navigation */}
@@ -25,9 +25,6 @@ const Header = () => {
           </a>
           <a href="#about" className="text-foreground-muted hover:text-foreground transition-colors">
             אודות
-          </a>
-          <a href="#contact" className="text-foreground-muted hover:text-foreground transition-colors">
-            צור קשר
           </a>
         </nav>
         

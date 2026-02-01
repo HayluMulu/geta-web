@@ -194,6 +194,105 @@
   .glow-orb-accent {
     background: hsl(var(--accent));
   }
+
+  /* ─────────────── THEY NOT LIKE US TITLE STYLES ─────────────── */
+  
+  /* Title Container */
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 4rem;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  /* Title Text - Base styling (white text) */
+  .title-text {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    font-family: var(--font-display);
+  }
+
+  /* Gradient effect for "NOT" word only */
+  .title-text-gradient {
+    /* Gradient effect */
+    background: linear-gradient(135deg, #00FFFF, #FF5BEF, #7A3FF2, #00FFFF);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* Glow effect */
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
+    
+    /* Animated gradient shift */
+    animation: gradientShiftTitle 3s ease-in-out infinite;
+  }
+
+  /* Gradient shift animation for title */
+  @keyframes gradientShiftTitle {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Title Underline */
+  .title-underline {
+    height: 4px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #00FFFF, #FF5BEF, transparent);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  /* Responsive adjustments for title */
+  @media (max-width: 768px) {
+    .title-container {
+      margin-bottom: 3rem;
+    }
+    
+    .title-text {
+      letter-spacing: 0.03em;
+    }
+    
+    .title-underline {
+      height: 3px;
+      max-width: 350px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title-container {
+      margin-bottom: 2rem;
+    }
+    
+    .title-underline {
+      height: 2px;
+      max-width: 280px;
+    }
+  }
+
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .title-text-gradient {
+      animation: none !important;
+      background-position: 0% 50%;
+    }
+  }
 }
 
 @layer utilities {
