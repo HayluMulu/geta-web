@@ -10,6 +10,7 @@ interface UseAudioInViewConfig {
 
 /**
  * Custom hook for playing audio with precise timing when element is in view
+ * Disabled on mobile devices (< 768px) to save bandwidth and improve performance
  * @param config - Configuration object with audio source and timing
  * @returns Audio element ref and playback state
  */
@@ -22,12 +23,30 @@ export const useAudioInView = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // Default to mobile to prevent initial load
 
   const { elementRef, isIntersecting } = useIntersectionObserver({
     threshold,
   });
 
+  // Check if device is mobile on mount and resize
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile(); // Check immediately
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Don't initialize audio on mobile devices
+    if (isMobile) {
+      return;
+    }
+
     // Create audio element if it doesn't exist
     if (!audioRef.current) {
       const audio = new Audio(audioSrc);
@@ -57,9 +76,14 @@ export const useAudioInView = ({
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
     };
-  }, [audioSrc, endTime]);
+  }, [audioSrc, endTime, isMobile]);
 
   useEffect(() => {
+    // Don't play audio on mobile devices
+    if (isMobile) {
+      return;
+    }
+
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -80,7 +104,7 @@ export const useAudioInView = ({
       audio.currentTime = startTime; // Reset to start time
       // Don't reset hasPlayed - audio should only play once per session
     }
-  }, [isIntersecting, hasPlayed, startTime, isPlaying]);
+  }, [isIntersecting, hasPlayed, startTime, isPlaying, isMobile]);
 
   return {
     elementRef,

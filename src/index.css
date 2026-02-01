@@ -9,7 +9,7 @@
   ═══════════════════════════════════════════════════════════════
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&family=Space+Grotesk:wght@400;700;900&display=swap');
 
 @layer base {
   :root {
@@ -163,14 +163,27 @@
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
     box-shadow: var(--shadow-card);
-    backdrop-filter: blur(12px);
     transition: all 0.3s ease;
+    /* Only use backdrop-filter on desktop */
+    backdrop-filter: blur(12px);
   }
   
   .card-cosmic:hover {
     border-color: hsl(var(--primary) / 0.5);
     box-shadow: var(--shadow-glow-sm);
     transform: translateY(-2px);
+  }
+
+  /* Remove backdrop-filter and complex shadows on mobile */
+  @media (max-width: 767px) {
+    .card-cosmic {
+      backdrop-filter: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-cosmic:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
   }
   
   /* ─────────────── GLOW EFFECTS ─────────────── */
@@ -181,6 +194,7 @@
     filter: blur(80px);
     opacity: 0.4;
     pointer-events: none;
+    will-change: transform;
   }
   
   .glow-orb-primary {
@@ -193,6 +207,13 @@
   
   .glow-orb-accent {
     background: hsl(var(--accent));
+  }
+
+  /* Hide glow orbs on mobile */
+  @media (max-width: 767px) {
+    .glow-orb {
+      display: none;
+    }
   }
 
   /* ─────────────── THEY NOT LIKE US TITLE STYLES ─────────────── */
@@ -231,6 +252,9 @@
     /* Glow effect */
     filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
     
+    /* GPU optimization */
+    will-change: background-position;
+    
     /* Animated gradient shift */
     animation: gradientShiftTitle 3s ease-in-out infinite;
   }
@@ -257,6 +281,14 @@
     border-radius: 2px;
     background: linear-gradient(90deg, transparent, #00FFFF, #FF5BEF, transparent);
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    will-change: transform;
+  }
+
+  /* Simplify underline on mobile */
+  @media (max-width: 767px) {
+    .title-underline {
+      box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
   }
 
   /* Responsive adjustments for title */
@@ -300,14 +332,17 @@
   
   .animate-float {
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
   }
   
   .animate-pulse-glow {
     animation: pulse-glow 4s ease-in-out infinite;
+    will-change: opacity;
   }
   
   .animate-shimmer {
     animation: shimmer 3s linear infinite;
+    will-change: background-position;
   }
   
   @keyframes float {

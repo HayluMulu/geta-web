@@ -17,11 +17,10 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              בואו נדבר
+            מוכנים לתת לעסק שלכם את ה-<span className="title-text-gradient">Show</span> שמגיע לו?
             </h2>
             <p className="text-foreground-muted mb-8 leading-relaxed">
-              יש לכם רעיון? פרויקט? או סתם רוצים לשמוע עוד? 
-              נשמח לשמוע מכם ולהתחיל לעבוד יחד.
+            אני כאן כדי לעזור לכם להפוך כל רעיון לתוכן שמושך את העין (ומביא לידים). השאירו פרטים, נקבע לקפה ונתחיל לתכנן את הפרויקט הבא שלכם.
             </p>
             
             {/* Contact Info */}
@@ -78,15 +77,12 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div>
-                <label className="text-sm text-foreground-muted mb-2 block">נושא</label>
-                <Input placeholder="במה נוכל לעזור?" className="bg-background/50" />
-              </div>
+   
               
               <div>
                 <label className="text-sm text-foreground-muted mb-2 block">הודעה</label>
                 <Textarea 
-                  placeholder="ספרו לנו על הפרויקט שלכם..." 
+                  placeholder="ספרו לי קצת על הפרויקט שלכם..." 
                   rows={4}
                   className="bg-background/50 resize-none"
                 />
