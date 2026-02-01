@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 const Header = () => {
   return (
@@ -17,21 +16,22 @@ const Header = () => {
         
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-8">
+          <a href="#about" className="text-foreground-muted hover:text-foreground transition-colors">
+            אודות
+          </a>
           <a href="#services" className="text-foreground-muted hover:text-foreground transition-colors">
             שירותים
           </a>
           <a href="#portfolio" className="text-foreground-muted hover:text-foreground transition-colors">
             עבודות
           </a>
-          <a href="#about" className="text-foreground-muted hover:text-foreground transition-colors">
-            אודות
+          <a href="#contact" className="text-foreground-muted hover:text-foreground transition-colors">
+           צור קשר
           </a>
         </nav>
         
         {/* CTA */}
-        <Button variant="cosmicOutline" size="sm" className="hidden sm:flex">
-          בואו נדבר
-        </Button>
+        <div className="hidden md:block" />
       </div>
     </motion.header>
   );
