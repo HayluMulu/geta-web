@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Video, Camera, Wand2, Mic } from "lucide-react";
+import { Video, Camera, Wand2, Compass } from "lucide-react";
 
 const services = [
   {
@@ -18,7 +18,7 @@ const services = [
     description: "עריכה קצבית, עיצוב סאונד וצבע (Color Grading) שמעניקים לכל פריים את ה-Look & Feel הנכון.",
   },
   {
-    icon: Mic,
+    icon: Compass,
     title: "ליווי אסטרטגי (התוצאה)",
     description: "אנחנו לא רק מצלמים, אנחנו מוודאים שהתוכן מותאם לפלטפורמה ולקהל היעד כדי להביא תוצאות בשטח.",
   },
