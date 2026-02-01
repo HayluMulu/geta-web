@@ -31,7 +31,7 @@ const Header = () => {
         </nav>
         
         {/* CTA */}
-        <div className="hidden md:block" />
+        <div className="hidden md:block h-9 rounded-md px-3" />
       </div>
     </motion.header>
   );

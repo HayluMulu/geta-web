@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Play, Sparkles } from "lucide-react";
+import { scrollToSection } from "@/hooks/use-scroll-to-section";
 
 const Hero = () => {
   return (
@@ -47,17 +48,16 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Button variant="cosmic" size="lg" className="group">
-            {/* <Play className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform" /> */}
+          <Button variant="cosmic" size="lg" className="group" onClick={() => scrollToSection('portfolio')}>
             תראו מה עשינו
           </Button>
-          <Button variant="cosmicOutline" size="lg">
+          <Button variant="cosmicOutline" size="lg" onClick={() => scrollToSection('contact')}>
             דברו איתנו
           </Button>
         </motion.div>
         
         {/* Scroll indicator */}
-        {/* <motion.div
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
@@ -74,7 +74,7 @@ const Hero = () => {
               className="w-1.5 h-1.5 rounded-full bg-primary"
             />
           </motion.div>
-        </motion.div> */}
+        </motion.div>
       </div>
     </section>
   );
