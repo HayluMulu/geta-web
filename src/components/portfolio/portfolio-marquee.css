@@ -1,0 +1,19 @@
+.portfolio-track {
+  animation-name: portfolio-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.portfolio-track.paused {
+  animation-play-state: paused;
+}
+
+@keyframes portfolio-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+

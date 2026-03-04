@@ -3,8 +3,8 @@ import { useIntersectionObserver } from './use-intersection-observer';
 
 interface UseAudioInViewConfig {
   audioSrc: string;
-  startTime: number; // in seconds
-  endTime: number; // in seconds
+  startTime: number;
+  endTime: number;
   threshold?: number;
 }
 
@@ -23,31 +23,26 @@ export const useAudioInView = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasPlayed, setHasPlayed] = useState(false);
-  const [isMobile, setIsMobile] = useState(true); // Default to mobile to prevent initial load
+  const [isMobile, setIsMobile] = useState(true);
 
   const { elementRef, isIntersecting } = useIntersectionObserver({
     threshold,
   });
 
-  // Check if device is mobile on mount and resize
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
-    checkMobile(); // Check immediately
+
+    checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
-    // Don't initialize audio on mobile devices
-    if (isMobile) {
-      return;
-    }
+    if (isMobile) return;
 
-    // Create audio element if it doesn't exist
     if (!audioRef.current) {
       const audio = new Audio(audioSrc);
       audio.preload = 'auto';
@@ -79,32 +74,24 @@ export const useAudioInView = ({
   }, [audioSrc, endTime, isMobile]);
 
   useEffect(() => {
-    // Don't play audio on mobile devices
-    if (isMobile) {
-      return;
-    }
+    if (isMobile) return;
 
     const audio = audioRef.current;
     if (!audio) return;
 
     if (isIntersecting && !hasPlayed) {
-      // Set the start time and play
       audio.currentTime = startTime;
       const playPromise = audio.play();
-
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
           console.warn('Audio autoplay was prevented:', error);
-          // Autoplay was prevented - this is expected in some browsers
         });
       }
-    } else if (!isIntersecting && isPlaying) {
-      // Stop playing when scrolling away
+    } else if (!isIntersecting) {
       audio.pause();
-      audio.currentTime = startTime; // Reset to start time
-      // Don't reset hasPlayed - audio should only play once per session
+      audio.currentTime = startTime;
     }
-  }, [isIntersecting, hasPlayed, startTime, isPlaying, isMobile]);
+  }, [isIntersecting, hasPlayed, startTime, isMobile]); // removed isPlaying
 
   return {
     elementRef,
@@ -113,4 +100,3 @@ export const useAudioInView = ({
     audioRef,
   };
 };
-
