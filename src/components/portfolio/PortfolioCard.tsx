@@ -110,11 +110,11 @@ export const PortfolioCard = ({
       className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none"
       style={{ zIndex: 5 }}
     >
-      <span className="text-[10px] text-primary font-medium uppercase tracking-widest">
-        {project.category}
+      <span className="text-sm text-primary font-medium uppercase tracking-widest">
+        {project.name}
       </span>
-      <h3 className="font-display text-sm font-semibold text-white mt-0.5 leading-snug">
-        {project.title}
+      <h3 className="font-display text-xl font-semibold text-white mt-0.5 leading-snug">
+        {project.profession}
       </h3>
     </motion.div>
   </div>
