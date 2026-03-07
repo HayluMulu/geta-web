@@ -34,7 +34,7 @@ export const PortfolioMarquee = ({
   const duration = MARQUEE_DURATION;
 
   return (
-    <div className="mt-12 relative w-full overflow-hidden">
+    <div className="mt-12 relative w-full overflow-hidden" dir="ltr">
       {/* Edge fades */}
       <div
         className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
