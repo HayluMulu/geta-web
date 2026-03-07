@@ -1,7 +1,29 @@
+.portfolio-edge-fade-start,
+.portfolio-edge-fade-end {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 6rem; /* w-24 */
+  z-index: 10;
+}
+
+.portfolio-edge-fade-start {
+  inset-inline-start: 0;
+}
+
+.portfolio-edge-fade-end {
+  inset-inline-end: 0;
+}
+
 .portfolio-track {
   animation-name: portfolio-marquee;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+[dir="rtl"] .portfolio-track {
+  animation-name: portfolio-marquee-rtl;
 }
 
 .portfolio-track.paused {
@@ -14,6 +36,15 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes portfolio-marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
   }
 }
 

@@ -35,14 +35,18 @@ export const PortfolioMarquee = ({
 
   return (
     <div className="mt-12 relative w-full overflow-hidden">
-      {/* Edge fades */}
+      {/* Edge fades — logical so they mirror in RTL */}
       <div
-        className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
-        style={{ background: "linear-gradient(to right, var(--background), transparent)" }}
+        className="portfolio-edge-fade-start"
+        style={{
+          background: "linear-gradient(to inline-end, var(--background), transparent)",
+        }}
       />
       <div
-        className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
-        style={{ background: "linear-gradient(to left, var(--background), transparent)" }}
+        className="portfolio-edge-fade-end"
+        style={{
+          background: "linear-gradient(to inline-start, var(--background), transparent)",
+        }}
       />
 
       {/* Marquee track — exactly 2 sets, animation moves by 1 set width */}
@@ -50,7 +54,7 @@ export const PortfolioMarquee = ({
         className={`portfolio-track flex${paused ? " paused" : ""}`}
         style={{
           gap: GAP,
-          paddingLeft: GAP,
+          paddingInlineStart: GAP,
           width: "max-content",
           animationDuration: `${duration}s`,
         }}
