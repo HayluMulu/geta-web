@@ -37,8 +37,7 @@ export const PortfolioCard = ({
     style={{ width: CARD_WIDTH, aspectRatio: "9/16" }}
     onMouseEnter={() => onEnter(cardKey)}
     onMouseLeave={() => onLeave(cardKey)}
-    onClick={() => onClick(cardKey)}
-  >
+    onClick={() => onClick(cardKey)}>
     <video
       ref={registerVideoRef(cardKey)}
       src={cldVideo(CLOUD_NAME, project.publicId)}
@@ -60,11 +59,13 @@ export const PortfolioCard = ({
         <motion.div
           key="play"
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: isHovered ? 1 : 0.45, scale: isHovered ? 1 : 0.88 }}
+          animate={{
+            opacity: isHovered ? 1 : 0.45,
+            scale: isHovered ? 1 : 0.88,
+          }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
+          className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-14 h-14 rounded-full bg-primary/25 backdrop-blur-sm border border-primary/50 flex items-center justify-center shadow-lg">
             <IconPlay />
           </div>
@@ -78,8 +79,7 @@ export const PortfolioCard = ({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          style={{ zIndex: 5 }}
-        >
+          style={{ zIndex: 5 }}>
           <div className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 flex items-center justify-center">
             <IconPause />
           </div>
@@ -97,23 +97,21 @@ export const PortfolioCard = ({
           transition={{ duration: 0.2 }}
           onClick={onToggleMute}
           style={{ zIndex: 20 }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/25 flex items-center justify-center text-white hover:bg-primary/40 hover:border-primary/50 transition-colors"
-        >
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/25 flex items-center justify-center text-white hover:bg-primary/40 hover:border-primary/50 transition-colors">
           {isMuted ? <IconVolumeOff /> : <IconVolumeOn />}
         </motion.button>
       )}
     </AnimatePresence>
 
     <motion.div
-      animate={{ opacity: isHovered || isPlaying ? 1 : 0, y: isHovered || isPlaying ? 0 : 8 }}
+      animate={{ y: isPlaying ? 0 : 8 }}
       transition={{ duration: 0.25 }}
       className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none"
-      style={{ zIndex: 5 }}
-    >
-      <span className="text-sm text-primary font-medium uppercase tracking-widest">
+      style={{ zIndex: 5 }}>
+      <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
         {project.name}
       </span>
-      <h3 className="font-display text-xl font-semibold text-white mt-0.5 leading-snug">
+      <h3 className="font-display text-base font-medium text-white mt-0.5 leading-snug">
         {project.profession}
       </h3>
     </motion.div>
