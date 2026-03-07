@@ -45,33 +45,24 @@ const About = () => {
 
             <div className="space-y-4">
               <p className="text-foreground/90 text-lg md:text-xl leading-relaxed">
-                ואם הגעתם לכאן, כנראה שאתם כבר מבינים שפוסט עם תמונה גנרית או
-                סרטון טיקטוק רנדומלי מדי פעם לא באמת מביא לקוחות.
+                ואם הגעתם לכאן, אתם כבר מבינים שסרטון טיקטוק אקראי פעם ב... לא
+                באמת מביא לקוחות.
               </p>
               <p className="text-foreground/90 text-lg md:text-xl leading-relaxed">
-                רוב בעלי העסקים שאני פוגש נמצאים בדיוק במקום הזה משקיעים זמן
-                בתוכן, מעלים פוסטים, עורכים שעות בטלפון, מעלים לרשתות ומחכים. הם
-                מחכים ללקוחות, אבל מקבלים רק לייקים מהמשפחה.
+                רוב בעלי העסקים שאני פוגש משקיעים שעות בעריכה בטלפון, מעלים
+                לרשתות ומחכים. הם מחכים ללקוחות אבל מקבלים בעיקר לייקים מהמשפחה.
               </p>
-
-              {/* <p className="text-foreground/90 text-lg md:text-xl leading-relaxed">
-              אבל מגלים שהם פשוט <span className="font-bold">שורפים כסף</span> על קהל שלא רלוונטי אליהם בכלל
-              </p> */}
               <p className="text-foreground/90 text-lg md:text-xl leading-relaxed">
-                ב- <span className="text-gradient-cosmic">Geta</span> Show אני
-                עובד אחרת. אני לא בא רק לצלם סרטון אני בונה יחד איתכם נכס
-                ויזואלי לעסק. תוכן שמשלב צילום חד, עריכה קצבית שתופסת את העין
-                בשנייה הראשונה, ומבנה חכם שגורם לאנשים לעצור, להקשיב ולהבין למה
-                דווקא אתם.
+                ב-<span className="text-gradient-cosmic">Geta</span> Show אני
+                עובד אחרת.
               </p>
-              <p className="text-foreground/80 text-base md:text-lg leading-relaxed">
-                בעולם שבו כולם צועקים, אני עוזר לבעלי עסקים לבלוט באמת. אני בונה
-                חוויה ויזואלית שממירה צפיות ללקוחות דרך שילוב של זווית צילום
-                ייחודית, עריכה קצבית ודיוק שיווקי.
+              <p className="text-foreground/90 text-lg md:text-xl leading-relaxed">
+                אני לא רק מצלם סרטון, אני בונה לכם נכס ויזואלי. שילוב של צילום
+                חד, עריכה מקצועית ומבנה שיווקי חכם שגורם לאנשים לעצור, להקשיב
+                ולהבין למה דווקא אתם.
               </p>
-
               <p className="text-primary text-lg md:text-xl font-semibold border-r-4 border-primary pr-4">
-                הופך את התוכן שלכם לכלי שמביא לקוחות ולא רק צפיות
+                הופך את התוכן שלכם לכלי שמביא לקוחות, ולא רק צפיות.{" "}
               </p>
             </div>
           </motion.div>
