@@ -90,7 +90,7 @@ const PortfolioSection = () => {
         <PortfolioTitle />
       </div>
 
-      {/* <PortfolioMarquee
+      <PortfolioMarquee
         projects={projects}
         paused={paused}
         playingKey={playingKey}
@@ -101,7 +101,7 @@ const PortfolioSection = () => {
         onCardClick={handleCardClick}
         onToggleMute={handleToggleMute}
         registerVideoRef={register}
-      /> */}
+      />
     </section>
   );
 };
