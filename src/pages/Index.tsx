@@ -49,6 +49,7 @@ const Index = () => {
           <Contact />
         </main>
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </div>
   );
