@@ -78,8 +78,6 @@ const PortfolioSection = () => {
       id="portfolio"
       className="relative py-24 overflow-hidden"
     >
-      className="relative py-24 overflow-hidden"
-    >
       <div className="container relative z-10 px-6">
         <PortfolioTitle />
       </div>
