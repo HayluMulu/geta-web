@@ -5,8 +5,8 @@ import { scrollToSection } from "@/hooks/use-scroll-to-section";
 
 const navLinks = [
   { label: "אודות", id: "about" },
-  { label: "שירותים", id: "services" },
   { label: "עבודות", id: "portfolio" },
+  { label: "F&Q", id: "F&Q" },
   { label: "צור קשר", id: "contact" },
 ];
 

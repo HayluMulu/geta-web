@@ -12,7 +12,7 @@ const PostProblemCTA = () => {
           transition={{ duration: 0.6 }}
           className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-10"
         >
-          אז יאללה תשאיר פרטים ונתחיל להפיק לך את מה שאתה צריך
+          אז יאללה תשאירו פרטים ונתחיל להפיק לך את מה שאתה צריך
         </motion.p>
 
         <motion.div

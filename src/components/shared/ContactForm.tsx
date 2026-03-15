@@ -67,7 +67,7 @@ const ContactForm = () => {
       >
         <div className="text-4xl mb-4">🎬</div>
         <h3 className="text-xl font-bold text-foreground mb-2" style={{ fontFamily: "var(--font-display)" }}>
-          תודה, אלי גטה יחזור אליך בקרוב!
+          תודה, אלי יחזור אליך בקרוב!
         </h3>
         <div className="h-1 w-24 mx-auto mt-4 rounded-full bg-gradient-to-r from-primary via-secondary to-accent" />
       </motion.div>

@@ -66,7 +66,7 @@ const FAQColumn = ({ items, startIndex }: { items: typeof faqItems; startIndex: 
 
 const FAQSection = () => {
   return (
-    <section className="relative py-24 px-6">
+    <section id="F&Q" className="relative py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -74,7 +74,7 @@ const FAQSection = () => {
           viewport={{ once: true }}
           className="font-display text-3xl md:text-5xl font-bold text-foreground text-center mb-14"
         >
-          שאלות ותשובות
+          שאלות נפוצות
         </motion.h2>
 
         <motion.div

@@ -19,7 +19,7 @@ const BrandingCTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-muted-foreground text-lg md:text-xl leading-relaxed max-w-3xl mx-auto space-y-4"
+          className="text-muted-primary text-lg md:text-xl leading-relaxed max-w-3xl mx-auto space-y-4"
         >
           <p>
             ואם אתה כבר פה הבנת שתוכן ברמה השבועית אתה חייב להעלות.
