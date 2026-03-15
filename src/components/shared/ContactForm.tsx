@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwWA8370u76CwWJYq__6hS5wfMKihn1SbKeCHlY-tIB1V_CqQvj6Wj6BnX0esO7A6zSKg/exec";
+  "https://script.google.com/macros/s/AKfycbxSF-rmEWtt1Yc1kUthS8QD-ZnI2Tucx2lg0EDMCkSjspr8xBMyG3yjQ5QTGaUyhlR5/exec";
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
