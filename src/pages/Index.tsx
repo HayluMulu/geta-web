@@ -30,6 +30,8 @@ const Index = () => {
           <BrandingCTA />
           {/* 2. Problem & Solution */}
           <ProblemSolutionSection />
+          {/* 2.5 Post-Problem CTA */}
+          <PostProblemCTA />
           {/* 3. Process */}
           <ProcessSection />
           {/* 4. Mid-page CTA */}
