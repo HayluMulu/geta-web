@@ -35,8 +35,12 @@ export const PortfolioCard = ({
   <div
     className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer bg-black"
     style={{ width: CARD_WIDTH, aspectRatio: "9/16" }}
-    onMouseEnter={() => onEnter(cardKey)}
-    onMouseLeave={() => onLeave(cardKey)}
+    onMouseEnter={() => {
+      if (window.matchMedia("(hover: hover)").matches) onEnter(cardKey);
+    }}
+    onMouseLeave={() => {
+      if (window.matchMedia("(hover: hover)").matches) onLeave(cardKey);
+    }}
     onClick={() => onClick(cardKey)}>
     <video
       ref={registerVideoRef(cardKey)}
