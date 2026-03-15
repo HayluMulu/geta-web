@@ -8,6 +8,7 @@ import ProcessSection from "@/components/sections/ProcessSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
 import About from "@/components/sections/About";
 import FinalCTA from "@/components/sections/FinalCTA";
+import FAQSection from "@/components/sections/FAQSection";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
@@ -37,7 +38,9 @@ const Index = () => {
           </section>
           {/* 7. Social Proof */}
           <SocialProofSection />
-          {/* 8. Final CTA */}
+          {/* 8. FAQ */}
+          <FAQSection />
+          {/* 9. Final CTA */}
           <section id="contact">
             <FinalCTA />
           </section>
