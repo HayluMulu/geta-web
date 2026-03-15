@@ -74,7 +74,6 @@ export const PortfolioMarquee = ({
   const handlePointerUp = useCallback((e: React.PointerEvent) => {
     if (!isDragging.current) return;
     isDragging.current = false;
-    scrollRef.current?.releasePointerCapture(e.pointerId);
 
     // Momentum / inertia
     const el = scrollRef.current;
