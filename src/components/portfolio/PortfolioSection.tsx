@@ -1,6 +1,7 @@
 import type { MouseEvent } from "react";
 import type React from "react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { useVideoRegistry } from "@/hooks/use-video-registry";
 
