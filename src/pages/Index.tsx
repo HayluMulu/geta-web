@@ -41,6 +41,8 @@ const Index = () => {
           <section id="contact">
             <FinalCTA />
           </section>
+          {/* 9. Contact */}
+          <Contact />
         </main>
         <Footer />
       </div>
