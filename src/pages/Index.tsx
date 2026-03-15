@@ -26,8 +26,10 @@ const Index = () => {
           <Hero />
           {/* 2. Problem & Solution */}
           <ProblemSolutionSection />
-          {/* 4. Process */}
+          {/* 3. Process */}
           <ProcessSection />
+          {/* 4. Mid-page CTA */}
+          <FinalCTA />
           {/* 5. Portfolio */}
           <Portfolio />
           {/* 6. About */}
@@ -38,10 +40,6 @@ const Index = () => {
           <SocialProofSection />
           {/* 8. FAQ */}
           <FAQSection />
-          {/* 9. Final CTA */}
-          <section id="contact">
-            <FinalCTA />
-          </section>
           {/* 9. Contact */}
           <Contact />
         </main>
