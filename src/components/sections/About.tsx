@@ -37,7 +37,7 @@ const About = () => {
             className="space-y-6 text-right dir-rtl order-1 lg:order-2">
             <div className="space-y-2">
               <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground leading-tight">
-                קוראים לי אלי גטה
+נעים להכיר אלי גטה 
               </h2>
               <div className="h-1 w-20 bg-primary rounded-full" />{" "}
               {/* Accent line */}
@@ -62,7 +62,7 @@ const About = () => {
                 ולהבין למה דווקא אתם.
               </p>
               <p className="text-primary text-lg md:text-xl font-semibold border-r-4 border-primary pr-4">
-                הופך את התוכן שלכם לכלי שמביא לקוחות, ולא רק צפיות.{" "}
+                הופך את התוכן שלכם לכלי שמבליט אתכם מעל המתחרים שלכם ומול הלקוחות שלכם
               </p>
             </div>
           </motion.div>
