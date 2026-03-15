@@ -16,35 +16,8 @@
   inset-inline-end: 0;
 }
 
-.portfolio-track {
-  animation-name: portfolio-marquee;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-[dir="rtl"] .portfolio-track {
-  animation-name: portfolio-marquee-rtl;
-}
-
-.portfolio-track.paused {
-  animation-play-state: paused;
-}
-
-@keyframes portfolio-marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes portfolio-marquee-rtl {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(50%);
-  }
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
