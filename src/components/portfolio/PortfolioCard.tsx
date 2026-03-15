@@ -103,9 +103,7 @@ export const PortfolioCard = ({
       )}
     </AnimatePresence>
 
-    <motion.div
-      animate={{ y: isPlaying ? 0 : 8 }}
-      transition={{ duration: 0.25 }}
+    <div
       className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none"
       style={{ zIndex: 5 }}>
       <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
@@ -114,7 +112,7 @@ export const PortfolioCard = ({
       <h3 className="font-display text-base font-medium text-white mt-0.5 leading-snug">
         {project.profession}
       </h3>
-    </motion.div>
+    </div>
   </div>
 );
 
