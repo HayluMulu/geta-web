@@ -25,6 +25,8 @@ const Index = () => {
         <main>
           {/* 1. Hero */}
           <Hero />
+          {/* 1.5 Branding CTA + Consultation Form */}
+          <BrandingCTA />
           {/* 2. Problem & Solution */}
           <ProblemSolutionSection />
           {/* 3. Process */}
