@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const About = () => {
   return (
     <section className="relative py-20 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-[1100px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image Side - Positioned first on Mobile, but we can swap on Desktop if you want */}
           <motion.div

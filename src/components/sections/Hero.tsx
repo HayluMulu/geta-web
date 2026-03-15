@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Play, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 py-24">
-      <div className="container relative z-10 text-center">
+      <div className="max-w-[1100px] mx-auto w-full relative z-10 text-center">
         {/* Subtle badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Main Heading - Clear hierarchy */}
+        {/* Main Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,16 +30,16 @@ const Hero = () => {
           <span className="text-gradient-cosmic">למגנט של לקוחות</span>
         </motion.h1>
 
-        {/* Subheading - Muted, supportive */}
+        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl text-foreground-muted max-w-2xl mx-auto mb-12 font-body leading-relaxed">
-   הפקות וידאו בסטנדרט הגבוה ביותר. משלב הרעיון ועד לעריכה המדויקת אני בונה לעסק שלכם את הבמה הוויזואלית שמגיעה לו.
+          הפקות וידאו בסטנדרט הגבוה ביותר. משלב הרעיון ועד לעריכה המדויקת אני בונה לעסק שלכם את הבמה הוויזואלית שמגיעה לו.
         </motion.p>
 
-        {/* CTAs - Clear primary and secondary */}
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,14 +49,16 @@ const Hero = () => {
             variant="cosmic"
             size="lg"
             className="group"
+            aria-label="קבע שיחת ייעוץ חינם"
             onClick={() => scrollToSection("contact")}>
             קבע שיחת ייעוץ חינם
           </Button>
           <Button
             variant="cosmicOutline"
             size="lg"
-            onClick={() => scrollToSection("contact")}>
-            דברו איתנו
+            aria-label="צפו בעבודות שלנו"
+            onClick={() => scrollToSection("portfolio")}>
+            צפו בעבודות שלנו
           </Button>
         </motion.div>
 

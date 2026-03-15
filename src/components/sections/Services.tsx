@@ -23,7 +23,7 @@ const services = [
     icon: Compass,
     title: "ליווי אסטרטגי (התוצאה)",
     description:
-      ` לא רק מצלמים, אלא1 מוודאים שהתוכן מותאם לפלטפורמה ולקהל היעד ע"י תכנון ציפיות יחד כדי להביא תוצאות בשטח.`,
+      ` לא רק מצלמים, אלא מוודאים שהתוכן מותאם לפלטפורמה ולקהל היעד ע"י תכנון ציפיות יחד כדי להביא תוצאות בשטח.`,
   },
 ];
 
@@ -42,8 +42,8 @@ const itemVariants = {
 
 const Services = () => {
   return (
-    <section className="relative py-24 px-6">
-      <div className="container relative z-10">
+    <section id="services" className="relative py-24 px-6">
+      <div className="max-w-[1100px] mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
