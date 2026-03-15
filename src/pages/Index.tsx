@@ -2,6 +2,7 @@ import StarField from "@/components/ui/StarField";
 import GlowOrbs from "@/components/ui/GlowOrbs";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
+import BrandingCTA from "@/components/sections/BrandingCTA";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
@@ -24,6 +25,8 @@ const Index = () => {
         <main>
           {/* 1. Hero */}
           <Hero />
+          {/* 1.5 Branding CTA + Consultation Form */}
+          <BrandingCTA />
           {/* 2. Problem & Solution */}
           <ProblemSolutionSection />
           {/* 3. Process */}
