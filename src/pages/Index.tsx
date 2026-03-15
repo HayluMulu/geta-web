@@ -28,6 +28,7 @@ const Index = () => {
             <About />
           </section>
           <ProcessSection />
+          <ProblemsVsSolution />
           <section id="services">
             <Services />
           </section>
