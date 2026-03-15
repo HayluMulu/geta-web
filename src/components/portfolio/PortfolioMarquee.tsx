@@ -92,8 +92,10 @@ export const PortfolioMarquee = ({
 
   const handleCardClickWrapper = useCallback(
     (key: string) => {
-      // Prevent click if user was dragging
-      if (dragMoved.current) return;
+      if (dragMoved.current) {
+        dragMoved.current = false;
+        return;
+      }
       onCardClick(key);
     },
     [onCardClick],
