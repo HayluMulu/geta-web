@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
 import BrandingCTA from "@/components/sections/BrandingCTA";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
+import PostProblemCTA from "@/components/sections/PostProblemCTA";
 import ProcessSection from "@/components/sections/ProcessSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
 import About from "@/components/sections/About";
@@ -29,6 +30,8 @@ const Index = () => {
           <BrandingCTA />
           {/* 2. Problem & Solution */}
           <ProblemSolutionSection />
+          {/* 2.5 Post-Problem CTA */}
+          <PostProblemCTA />
           {/* 3. Process */}
           <ProcessSection />
           {/* 4. Mid-page CTA */}
