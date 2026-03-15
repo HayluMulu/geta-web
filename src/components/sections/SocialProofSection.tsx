@@ -4,7 +4,7 @@ import { Play, MessageCircle, User } from "lucide-react";
 const SocialProofSection = () => {
   return (
     <section className="relative py-20 px-6">
-      <div className="max-w-[1100px] mx-auto">
+      <div className="max-w-[1100px] mx-auto" aria-label="המלצות לקוחות">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
