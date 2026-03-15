@@ -114,10 +114,26 @@ export const PortfolioMarquee = ({
       }
     };
     el.addEventListener("scroll", handleScroll);
-    // Start in the middle (second copy) for seamless looping
     el.scrollLeft = el.scrollWidth / 4;
     return () => el.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Auto-scroll when not dragging and not playing a video
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const speed = 0.8; // px per frame
+    let rafId: number;
+    const autoScroll = () => {
+      if (!isDragging.current && !paused) {
+        el.scrollLeft += speed;
+      }
+      rafId = requestAnimationFrame(autoScroll);
+    };
+    rafId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(rafId);
+  }, [paused]);
 
   return (
     <div className="mt-12 relative w-full overflow-hidden" dir="ltr">
