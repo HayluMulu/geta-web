@@ -38,7 +38,9 @@ const Index = () => {
           </section>
           {/* 7. Social Proof */}
           <SocialProofSection />
-          {/* 8. Final CTA */}
+          {/* 8. FAQ */}
+          <FAQSection />
+          {/* 9. Final CTA */}
           <section id="contact">
             <FinalCTA />
           </section>
