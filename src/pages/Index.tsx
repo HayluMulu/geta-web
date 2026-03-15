@@ -24,10 +24,8 @@ const Index = () => {
         <main>
           {/* 1. Hero */}
           <Hero />
-          {/* 2. Problem */}
-          <ProblemSection />
-          {/* 3. Solution */}
-          <SolutionSection />
+          {/* 2. Problem & Solution */}
+          <ProblemSolutionSection />
           {/* 4. Process */}
           <ProcessSection />
           {/* 5. Portfolio */}
