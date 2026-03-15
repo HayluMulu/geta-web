@@ -76,7 +76,8 @@ const PortfolioSection = () => {
   return (
     <section
       id="portfolio"
-      ref={audioSectionRef as React.RefObject<HTMLElement>}
+      className="relative py-24 overflow-hidden"
+    >
       className="relative py-24 overflow-hidden"
     >
       <div className="container relative z-10 px-6">
