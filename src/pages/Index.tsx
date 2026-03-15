@@ -9,6 +9,7 @@ import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
 import About from "@/components/sections/About";
 import ProcessSection from "@/components/sections/ProcessSection";
+import ProblemsVsSolution from "@/components/sections/ProblemsVsSolution";
 
 const Index = () => {
   return (
@@ -27,6 +28,7 @@ const Index = () => {
             <About />
           </section>
           <ProcessSection />
+          <ProblemsVsSolution />
           <section id="services">
             <Services />
           </section>
