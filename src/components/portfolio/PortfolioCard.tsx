@@ -104,7 +104,8 @@ export const PortfolioCard = ({
     </AnimatePresence>
 
     <div
-      className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none"
+      className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none text-right"
+      dir="rtl"
       style={{ zIndex: 5 }}>
       <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
         {project.name}
