@@ -49,8 +49,8 @@ const Hero = () => {
             variant="cosmic"
             size="lg"
             className="group"
-            onClick={() => scrollToSection("portfolio")}>
-            תראו מה עשינו
+            onClick={() => scrollToSection("contact")}>
+            קבע שיחת ייעוץ חינם
           </Button>
           <Button
             variant="cosmicOutline"
