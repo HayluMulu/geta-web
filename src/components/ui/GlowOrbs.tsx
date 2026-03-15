@@ -1,9 +1,14 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const GlowOrbs = () => {
+  const isMobile = useIsMobile();
+
+  // Don't render at all on mobile — CSS hides them but framer-motion still runs JS animations
+  if (isMobile) return null;
+
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-      {/* Primary cyan orb - top right */}
       <motion.div
         className="glow-orb glow-orb-primary w-[600px] h-[600px]"
         style={{ top: "-10%", right: "-5%" }}
@@ -18,8 +23,6 @@ const GlowOrbs = () => {
           ease: "easeInOut",
         }}
       />
-      
-      {/* Secondary purple orb - bottom left */}
       <motion.div
         className="glow-orb glow-orb-secondary w-[500px] h-[500px]"
         style={{ bottom: "10%", left: "-10%" }}
@@ -34,8 +37,6 @@ const GlowOrbs = () => {
           ease: "easeInOut",
         }}
       />
-      
-      {/* Accent pink orb - center */}
       <motion.div
         className="glow-orb glow-orb-accent w-[400px] h-[400px] opacity-30"
         style={{ top: "40%", left: "50%", transform: "translateX(-50%)" }}

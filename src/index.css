@@ -247,21 +247,21 @@
 
   /* Gradient effect for "NOT" word only */
   .title-text-gradient {
-    /* Gradient effect */
     background: linear-gradient(135deg, #00FFFF, #FF5BEF, #7A3FF2, #00FFFF);
     background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
-    /* Glow effect */
     filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
-    
-    /* GPU optimization */
     will-change: background-position;
-    
-    /* Animated gradient shift */
     animation: gradientShiftTitle 3s ease-in-out infinite;
+  }
+
+  @media (max-width: 767px) {
+    .title-text-gradient {
+      filter: none;
+      animation: none;
+    }
   }
 
   /* Gradient shift animation for title */
