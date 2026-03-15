@@ -53,7 +53,6 @@ export const PortfolioMarquee = ({
     lastTime.current = Date.now();
     velocity.current = 0;
     cancelAnimationFrame(animFrame.current);
-    el.setPointerCapture(e.pointerId);
   }, []);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -75,7 +74,6 @@ export const PortfolioMarquee = ({
   const handlePointerUp = useCallback((e: React.PointerEvent) => {
     if (!isDragging.current) return;
     isDragging.current = false;
-    scrollRef.current?.releasePointerCapture(e.pointerId);
 
     // Momentum / inertia
     const el = scrollRef.current;
@@ -94,8 +92,10 @@ export const PortfolioMarquee = ({
 
   const handleCardClickWrapper = useCallback(
     (key: string) => {
-      // Prevent click if user was dragging
-      if (dragMoved.current) return;
+      if (dragMoved.current) {
+        dragMoved.current = false;
+        return;
+      }
       onCardClick(key);
     },
     [onCardClick],
