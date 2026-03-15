@@ -12,6 +12,7 @@ import FAQSection from "@/components/sections/FAQSection";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
+import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 
 const Index = () => {
   return (
@@ -48,6 +49,7 @@ const Index = () => {
           <Contact />
         </main>
         <Footer />
+        <FloatingWhatsApp />
       </div>
     </div>
   );
