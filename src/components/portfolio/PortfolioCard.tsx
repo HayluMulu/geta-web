@@ -65,7 +65,7 @@ export const PortfolioCard = ({
           }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none">
           <div className="w-14 h-14 rounded-full bg-primary/25 backdrop-blur-sm border border-primary/50 flex items-center justify-center shadow-lg">
             <IconPlay />
           </div>
@@ -78,7 +78,7 @@ export const PortfolioCard = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none"
           style={{ zIndex: 5 }}>
           <div className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 flex items-center justify-center">
             <IconPause />
@@ -103,9 +103,7 @@ export const PortfolioCard = ({
       )}
     </AnimatePresence>
 
-    <motion.div
-      animate={{ y: isPlaying ? 0 : 8 }}
-      transition={{ duration: 0.25 }}
+    <div
       className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none"
       style={{ zIndex: 5 }}>
       <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
@@ -114,7 +112,7 @@ export const PortfolioCard = ({
       <h3 className="font-display text-base font-medium text-white mt-0.5 leading-snug">
         {project.profession}
       </h3>
-    </motion.div>
+    </div>
   </div>
 );
 
