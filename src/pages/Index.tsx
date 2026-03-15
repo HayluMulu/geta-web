@@ -2,8 +2,7 @@ import StarField from "@/components/ui/StarField";
 import GlowOrbs from "@/components/ui/GlowOrbs";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
-import ProblemSection from "@/components/sections/ProblemSection";
-import SolutionSection from "@/components/sections/SolutionSection";
+import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import ProcessSection from "@/components/sections/ProcessSection";
 import SocialProofSection from "@/components/sections/SocialProofSection";
 import About from "@/components/sections/About";
@@ -25,10 +24,8 @@ const Index = () => {
         <main>
           {/* 1. Hero */}
           <Hero />
-          {/* 2. Problem */}
-          <ProblemSection />
-          {/* 3. Solution */}
-          <SolutionSection />
+          {/* 2. Problem & Solution */}
+          <ProblemSolutionSection />
           {/* 4. Process */}
           <ProcessSection />
           {/* 5. Portfolio */}
