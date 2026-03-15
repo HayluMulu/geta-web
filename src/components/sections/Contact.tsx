@@ -29,42 +29,7 @@ const Contact = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="card-cosmic p-6 md:p-8">
-            <form className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm text-foreground-muted mb-2 block">
-                    שם מלא
-                  </label>
-                  <Input placeholder="השם שלך" className="bg-background/50" />
-                </div>
-                <div>
-                  <label className="text-sm text-foreground-muted mb-2 block">
-                    טלפון
-                  </label>
-                  <Input
-                    type="number"
-                    placeholder="050-1234567"
-                    className="bg-background/50"
-                  />
-                </div>
-              </div>
-
-              {/* <div>
-                <label className="text-sm text-foreground-muted mb-2 block">הודעה</label>
-                <Textarea 
-                  placeholder="ספרו לי קצת על הפרויקט שלכם..." 
-                  rows={4}
-                  className="bg-background/50 resize-none"
-                />
-              </div> */}
-
-              <Button
-                variant="cosmic"
-                size="lg"
-                className="w-full h-14 text-lg font-bold">
-                יאללה בואו נדבר{" "}
-              </Button>
-            </form>
+            <ContactForm />
           </motion.div>
 
           {/* Info Side - מוצג רק במחשב (lg:block) */}

@@ -21,6 +21,7 @@ const Index = () => {
         <Header />
         <main>
           <Hero />
+          <BrandingCTA />
           <section id="about">
             <About />
           </section>
