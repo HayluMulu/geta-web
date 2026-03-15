@@ -80,6 +80,15 @@ const PortfolioSection = () => {
       className="relative py-24 overflow-hidden"
     >
       <div className="container relative z-10 px-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="font-display text-3xl md:text-5xl font-bold text-foreground text-center mb-8"
+        >
+          הנה כמה מהעבודות שלנו
+        </motion.h2>
         <PortfolioTitle />
       </div>
 
