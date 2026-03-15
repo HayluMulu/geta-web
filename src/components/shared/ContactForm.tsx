@@ -61,11 +61,13 @@ const ContactForm = () => {
             name="phone"
             type="tel"
             inputMode="numeric"
+            dir="rtl"
             placeholder="050-1234567"
             className="bg-background/50"
             required
             aria-required="true"
-            maxLength={20}
+            maxLength={11}
+            pattern="[\d\-]{7,11}"
           />
         </div>
       </div>
