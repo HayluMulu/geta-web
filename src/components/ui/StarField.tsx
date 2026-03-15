@@ -9,6 +9,8 @@ interface Star {
   twinkleOffset: number;
 }
 
+const isMobile = () => window.innerWidth < 768;
+
 const StarField = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
@@ -21,6 +23,8 @@ const StarField = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const mobile = isMobile();
+
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -28,10 +32,11 @@ const StarField = () => {
     };
 
     const initStars = () => {
-      // Reduced star count for less visual noise
-      const starCount = Math.floor((canvas.width * canvas.height) / 15000);
+      // Fewer stars on mobile
+      const density = mobile ? 30000 : 15000;
+      const starCount = Math.floor((canvas.width * canvas.height) / density);
       starsRef.current = [];
-      
+
       for (let i = 0; i < starCount; i++) {
         starsRef.current.push({
           x: Math.random() * canvas.width,
@@ -44,11 +49,34 @@ const StarField = () => {
       }
     };
 
+    if (mobile) {
+      // On mobile: render once, no animation loop
+      resizeCanvas();
+      starsRef.current.forEach((star) => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.7})`;
+        ctx.fill();
+      });
+
+      const handleResize = () => {
+        resizeCanvas();
+        starsRef.current.forEach((star) => {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.7})`;
+          ctx.fill();
+        });
+      };
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+
+    // Desktop: animated twinkling
     const animate = (time: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       starsRef.current.forEach((star) => {
-        // Gentle, slow twinkling
         const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.3 + 0.7;
         const currentOpacity = star.opacity * twinkle;
 
