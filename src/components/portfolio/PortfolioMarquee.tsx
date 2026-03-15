@@ -53,7 +53,6 @@ export const PortfolioMarquee = ({
     lastTime.current = Date.now();
     velocity.current = 0;
     cancelAnimationFrame(animFrame.current);
-    el.setPointerCapture(e.pointerId);
   }, []);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
