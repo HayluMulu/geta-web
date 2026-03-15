@@ -34,8 +34,7 @@ const Index = () => {
           <PostProblemCTA />
           {/* 3. Process */}
           <ProcessSection />
-          {/* 4. Mid-page CTA */}
-          <FinalCTA />
+          {/* 5. Portfolio */}
           {/* 5. Portfolio */}
           <Portfolio />
           {/* 6. About */}
