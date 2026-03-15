@@ -2,7 +2,6 @@ import type { MouseEvent } from "react";
 import type React from "react";
 import { useEffect, useState } from "react";
 
-import { useAudioInView } from "@/hooks/use-audio-in-view";
 import { useVideoRegistry } from "@/hooks/use-video-registry";
 
 import { projects } from "./portfolio.data";
@@ -10,12 +9,6 @@ import PortfolioMarquee from "./PortfolioMarquee";
 import PortfolioTitle from "./PortfolioTitle";
 
 const PortfolioSection = () => {
-  const { elementRef: audioSectionRef } = useAudioInView({
-    audioSrc: "/assets/music.mp3",
-    startTime: 116,
-    endTime: 120,
-    threshold: 0.5,
-  });
 
   const { register, stopAll, get } = useVideoRegistry();
 
@@ -83,7 +76,6 @@ const PortfolioSection = () => {
   return (
     <section
       id="portfolio"
-      ref={audioSectionRef as React.RefObject<HTMLElement>}
       className="relative py-24 overflow-hidden"
     >
       <div className="container relative z-10 px-6">
