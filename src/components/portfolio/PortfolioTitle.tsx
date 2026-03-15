@@ -8,9 +8,9 @@ export const PortfolioTitle = () => (
     viewport={{ once: true, amount: 0.3 }}
     transition={{ duration: 0.8, ease: "easeOut" }}
   >
-    <h2 className="title-text">
+    <h3 className="title-text text-xl md:text-2xl">
       THEY <span className="title-text-gradient">NOT</span> LIKE US
-    </h2>
+    </h3>
     <motion.div
       className="title-underline"
       initial={{ scaleX: 0 }}
