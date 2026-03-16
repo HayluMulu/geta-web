@@ -44,7 +44,7 @@ const ContactForm = () => {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: trimmedName, phone: trimmedPhone, timestamp: new Date().toISOString() }),
+        body: JSON.stringify({ name: trimmedName, phone: trimmedPhone }),
       });
       setName("");
       setPhone("");
