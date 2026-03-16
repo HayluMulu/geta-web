@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzJV0V1MGT3WEmkMDNh2MrTAWpLj4ubrEY6TboOy8CzOnorN_Cn48lP2nZqjnijCi4M/exec";
+  "https://script.google.com/macros/s/AKfycbzzVHDmC6aoy8ptLIPy3SYLM7kQvjJ__bDpPSKIkspO-2MdxOA-J1OsNUVwXWtqRfbi/exec";
 
 const PHONE_REGEX = /^0(?:[23489]|5[0-9]|7[2-9])[-]?\d{7}$/;
 
@@ -44,7 +44,7 @@ const ContactForm = () => {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: trimmedName, phone: trimmedPhone }),
+        body: JSON.stringify({ name: trimmedName, phone: trimmedPhone, timestamp: new Date().toISOString() }),
       });
       setName("");
       setPhone("");
