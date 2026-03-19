@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GOOGLE_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxSF-rmEWtt1Yc1kUthS8QD-ZnI2Tucx2lg0EDMCkSjspr8xBMyG3yjQ5QTGaUyhlR5/exec";
+  "https://script.google.com/macros/s/AKfycbzzVHDmC6aoy8ptLIPy3SYLM7kQvjJ__bDpPSKIkspO-2MdxOA-J1OsNUVwXWtqRfbi/exec";
 
 const PHONE_REGEX = /^0(?:[23489]|5[0-9]|7[2-9])[-]?\d{7}$/;
 
