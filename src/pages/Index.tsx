@@ -41,8 +41,8 @@ const Index = () => {
           <section id="about">
             <About />
           </section>
-          {/* 7. Social Proof */}
-          <SocialProofSection />
+          {/* 7. Social Proof
+          <SocialProofSection /> */}
           {/* 8. FAQ */}
           <FAQSection />
           {/* 9. Contact */}
