@@ -33,7 +33,7 @@ export const PortfolioCard = ({
   registerVideoRef,
 }: PortfolioCardProps) => (
   <div
-    className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer bg-black"
+    className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer bg-black mobile-portfolio-card"
     style={{ width: CARD_WIDTH, aspectRatio: "9/16" }}
     onMouseEnter={() => {
       if (window.matchMedia("(hover: hover)").matches) onEnter(cardKey);
