@@ -21,3 +21,9 @@
   display: none;
 }
 
+/* Smaller cards on mobile */
+@media (max-width: 767px) {
+  .mobile-portfolio-card {
+    width: 200px !important;
+  }
+}
