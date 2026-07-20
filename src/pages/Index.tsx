@@ -6,9 +6,7 @@ import BrandingCTA from "@/components/sections/BrandingCTA";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import PostProblemCTA from "@/components/sections/PostProblemCTA";
 import ProcessSection from "@/components/sections/ProcessSection";
-import SocialProofSection from "@/components/sections/SocialProofSection";
 import About from "@/components/sections/About";
-import FinalCTA from "@/components/sections/FinalCTA";
 import FAQSection from "@/components/sections/FAQSection";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "@/components/sections/Contact";
@@ -41,8 +39,6 @@ const Index = () => {
           <section id="about">
             <About />
           </section>
-          {/* 7. Social Proof
-          <SocialProofSection /> */}
           {/* 8. FAQ */}
           <FAQSection />
           {/* 9. Contact */}
