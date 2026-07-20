@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 
 import { useVideoRegistry } from "@/hooks/use-video-registry";
 import SceneLabel from "@/components/ui/SceneLabel";
+import { trackEvent } from "@/lib/analytics";
 
 import { projects } from "./portfolio.data";
 import PortfolioMarquee from "./PortfolioMarquee";
@@ -67,6 +68,10 @@ const PortfolioSection = () => {
       setPlayingKey(key);
       setIsMuted(false);
       setPaused(true);
+      const publicId = key.slice(key.indexOf("-") + 1);
+      trackEvent("reel_play", {
+        project: projects.find((p) => p.publicId === publicId)?.name ?? publicId,
+      });
     }
   };
 

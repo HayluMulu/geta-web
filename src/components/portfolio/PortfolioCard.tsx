@@ -20,6 +20,10 @@ type PortfolioCardProps = {
   registerVideoRef: (key: string) => (element: HTMLVideoElement | null) => void;
 };
 
+/**
+ * Portfolio clip framed like an iPhone / vertical reel —
+ * same carousel, phone chrome from the old Reels Stage.
+ */
 export const PortfolioCard = ({
   project,
   cardKey,
@@ -33,93 +37,101 @@ export const PortfolioCard = ({
   registerVideoRef,
 }: PortfolioCardProps) => (
   <div
-    className="relative flex-shrink-0 rounded-xl overflow-hidden cursor-pointer bg-black mobile-portfolio-card"
-    style={{ width: CARD_WIDTH, aspectRatio: "9/16" }}
+    className="relative flex-shrink-0 cursor-pointer mobile-portfolio-card portfolio-phone"
+    style={{ width: CARD_WIDTH }}
     onMouseEnter={() => {
       if (window.matchMedia("(hover: hover)").matches) onEnter(cardKey);
     }}
     onMouseLeave={() => {
       if (window.matchMedia("(hover: hover)").matches) onLeave(cardKey);
     }}
-    onClick={() => onClick(cardKey)}>
-    <video
-      ref={registerVideoRef(cardKey)}
-      src={cldVideo(CLOUD_NAME, project.publicId)}
-      poster={cldPoster(CLOUD_NAME, project.publicId)}
-      muted
-      playsInline
-      preload="metadata"
-      className="absolute inset-0 w-full h-full object-cover"
-    />
+    onClick={() => onClick(cardKey)}
+  >
+    <div className="reel-phone-bezel portfolio-phone-bezel">
+      <div className="reel-phone-notch" aria-hidden="true" />
 
-    <motion.div
-      animate={{ opacity: isPlaying ? 0.1 : 0.65 }}
-      transition={{ duration: 0.3 }}
-      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none"
-    />
+      <video
+        ref={registerVideoRef(cardKey)}
+        src={cldVideo(CLOUD_NAME, project.publicId)}
+        poster={cldPoster(CLOUD_NAME, project.publicId)}
+        muted
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
 
-    <AnimatePresence>
-      {!isPlaying && (
-        <motion.div
-          key="play"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{
-            opacity: isHovered ? 1 : 0.45,
-            scale: isHovered ? 1 : 0.88,
-          }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-          className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none">
-          <div className="w-14 h-14 rounded-full bg-primary/25 backdrop-blur-sm border border-primary/50 flex items-center justify-center shadow-lg">
-            <IconPlay />
-          </div>
-        </motion.div>
-      )}
-      {isPlaying && isHovered && (
-        <motion.div
-          key="pause"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none"
-          style={{ zIndex: 5 }}>
-          <div className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 flex items-center justify-center">
-            <IconPause />
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+      <motion.div
+        animate={{ opacity: isPlaying ? 0.08 : 0.55 }}
+        transition={{ duration: 0.3 }}
+        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent pointer-events-none"
+      />
 
-    <AnimatePresence>
-      {isPlaying && (
-        <motion.button
-          key="mute"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.2 }}
-          onClick={onToggleMute}
-          style={{ zIndex: 20 }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/25 flex items-center justify-center text-white hover:bg-primary/40 hover:border-primary/50 transition-colors">
-          {isMuted ? <IconVolumeOff /> : <IconVolumeOn />}
-        </motion.button>
-      )}
-    </AnimatePresence>
+      <AnimatePresence>
+        {!isPlaying && (
+          <motion.div
+            key="play"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{
+              opacity: isHovered ? 1 : 0.45,
+              scale: isHovered ? 1 : 0.88,
+            }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none"
+          >
+            <div className="w-14 h-14 rounded-full bg-primary/25 backdrop-blur-sm border border-primary/50 flex items-center justify-center shadow-lg">
+              <IconPlay />
+            </div>
+          </motion.div>
+        )}
+        {isPlaying && isHovered && (
+          <motion.div
+            key="pause"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none"
+            style={{ zIndex: 5 }}
+          >
+            <div className="w-14 h-14 rounded-full bg-black/60 backdrop-blur-sm border border-white/30 flex items-center justify-center">
+              <IconPause />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-    <div
-      className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none text-right"
-      dir="rtl"
-      style={{ zIndex: 5 }}>
-      <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
-        {project.name}
-      </span>
-      <h3 className="font-display text-base font-medium text-white mt-0.5 leading-snug">
-        {project.profession}
-      </h3>
+      <AnimatePresence>
+        {isPlaying && (
+          <motion.button
+            key="mute"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={onToggleMute}
+            style={{ zIndex: 20 }}
+            className="absolute top-10 left-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm border border-white/25 flex items-center justify-center text-white hover:bg-primary/40 hover:border-primary/50 transition-colors"
+          >
+            {isMuted ? <IconVolumeOff /> : <IconVolumeOn />}
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <div
+        className="absolute bottom-0 left-0 right-0 p-4 pointer-events-none text-right"
+        dir="rtl"
+        style={{ zIndex: 5 }}
+      >
+        <span className="font-display text-lg font-semibold text-primary uppercase tracking-widest">
+          {project.name}
+        </span>
+        <h3 className="font-display text-base font-medium text-white mt-0.5 leading-snug">
+          {project.profession}
+        </h3>
+      </div>
     </div>
   </div>
 );
 
 export default PortfolioCard;
-
