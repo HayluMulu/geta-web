@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useSpring, useMotionValueEvent, useReducedMotion } from "framer-motion";
 
 /**
  * Video-editor style scrubber: a gradient progress bar at the very top
- * of the page plus a live timecode readout (HH:MM:SS:FF) driven by scroll,
- * as if the visitor is scrubbing through a film of the page.
+ * of the page plus a live timecode readout (HH:MM:SS:FF) driven by scroll.
  */
-const TOTAL_SECONDS = 90; // full page scroll = 1.5 minutes of "footage"
+const TOTAL_SECONDS = 90;
 const FPS = 24;
 
 const formatTimecode = (progress: number) => {
@@ -23,14 +22,22 @@ const ScrollTimecode = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.4 });
   const [timecode, setTimecode] = useState("00:00:00:00");
+  const lastText = useRef(timecode);
+  const lastUpdate = useRef(0);
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    setTimecode(formatTimecode(value));
+    const now = performance.now();
+    // Cap React re-renders ~10fps — bar still updates via motion value
+    if (now - lastUpdate.current < 100) return;
+    lastUpdate.current = now;
+    const next = formatTimecode(value);
+    if (next === lastText.current) return;
+    lastText.current = next;
+    setTimecode(next);
   });
 
   return (
     <>
-      {/* Scrub bar */}
       <motion.div
         aria-hidden="true"
         className="fixed top-0 left-0 right-0 h-[3px] z-[70] origin-left"
@@ -41,7 +48,6 @@ const ScrollTimecode = () => {
         }}
       />
 
-      {/* Timecode readout — desktop only */}
       <div
         aria-hidden="true"
         className="hidden md:flex fixed bottom-5 left-5 z-[70] items-center gap-2 pointer-events-none"

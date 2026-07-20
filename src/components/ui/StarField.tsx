@@ -20,10 +20,11 @@ const StarField = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     const mobile = isMobile();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -32,8 +33,8 @@ const StarField = () => {
     };
 
     const initStars = () => {
-      // Fewer stars on mobile
-      const density = mobile ? 30000 : 15000;
+      // Sparser field = less per-frame work
+      const density = mobile ? 40000 : 22000;
       const starCount = Math.floor((canvas.width * canvas.height) / density);
       starsRef.current = [];
 
@@ -41,63 +42,63 @@ const StarField = () => {
         starsRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          size: Math.random() * 1.5 + 0.5,
-          opacity: Math.random() * 0.5 + 0.2,
-          twinkleSpeed: Math.random() * 0.02 + 0.01,
+          size: Math.random() * 1.4 + 0.4,
+          opacity: Math.random() * 0.45 + 0.2,
+          twinkleSpeed: Math.random() * 0.015 + 0.008,
           twinkleOffset: Math.random() * Math.PI * 2,
         });
       }
     };
 
-    if (mobile) {
-      // On mobile: render once, no animation loop
-      resizeCanvas();
-      starsRef.current.forEach((star) => {
+    const paintStatic = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const star of starsRef.current) {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.7})`;
         ctx.fill();
-      });
+      }
+    };
 
+    if (mobile || reduceMotion) {
+      resizeCanvas();
+      paintStatic();
       const handleResize = () => {
         resizeCanvas();
-        starsRef.current.forEach((star) => {
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * 0.7})`;
-          ctx.fill();
-        });
+        paintStatic();
       };
-      window.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize, { passive: true });
       return () => window.removeEventListener("resize", handleResize);
     }
 
-    // Desktop: animated twinkling
+    let lastPaint = 0;
+    const TARGET_MS = 50; // ~20fps twinkle is enough; frees frames for the trail
+
     const animate = (time: number) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (time - lastPaint >= TARGET_MS) {
+        lastPaint = time;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      starsRef.current.forEach((star) => {
-        const twinkle = Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.3 + 0.7;
-        const currentOpacity = star.opacity * twinkle;
-
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${currentOpacity})`;
-        ctx.fill();
-      });
+        for (const star of starsRef.current) {
+          const twinkle =
+            Math.sin(time * star.twinkleSpeed + star.twinkleOffset) * 0.3 + 0.7;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity * twinkle})`;
+          ctx.fill();
+        }
+      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
 
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", resizeCanvas, { passive: true });
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
@@ -106,6 +107,7 @@ const StarField = () => {
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none"
       style={{ zIndex: 0 }}
+      aria-hidden="true"
     />
   );
 };

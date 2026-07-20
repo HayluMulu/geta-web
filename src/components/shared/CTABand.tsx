@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import MagneticButton from "@/components/ui/MagneticButton";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
 import { trackEvent } from "@/lib/analytics";
 
@@ -30,7 +30,6 @@ const CTABand = ({ title, subtitle, buttonLabel, location, trustLine }: CTABandP
       className="aurora-ring max-w-2xl mx-auto"
     >
       <div className="aurora-ring-inner px-6 py-10 md:px-12 md:py-12 text-center">
-        {/* soft glow behind the content */}
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-24 h-48 pointer-events-none"
@@ -66,16 +65,16 @@ const CTABand = ({ title, subtitle, buttonLabel, location, trustLine }: CTABandP
           transition={{ duration: 0.55, delay: 0.35, ease: "easeOut" }}
           className="flex flex-col items-center gap-3"
         >
-          <Button
+          <MagneticButton
             variant="cosmic"
             size="lg"
-            className="btn-shine group h-14 px-10 text-lg font-bold"
+            className="group h-14 px-10 text-lg font-bold"
             onClick={handleClick}
             aria-label={buttonLabel}
           >
             {buttonLabel}
             <ArrowLeft className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" />
-          </Button>
+          </MagneticButton>
 
           {trustLine && (
             <span className="text-sm text-foreground-muted/80">{trustLine}</span>

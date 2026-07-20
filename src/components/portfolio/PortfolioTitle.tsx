@@ -8,6 +8,10 @@ export const PortfolioTitle = () => (
     viewport={{ once: true, amount: 0.3 }}
     transition={{ duration: 0.8, ease: "easeOut" }}
   >
+    <span className="rec-badge mb-4" dir="ltr">
+      <span className="scene-label-dot" style={{ width: 6, height: 6 }} />
+      REEL
+    </span>
     <h3 className="title-text text-xl md:text-2xl">
       THEY <span className="title-text-gradient">NOT</span> LIKE US
     </h3>
@@ -23,4 +27,3 @@ export const PortfolioTitle = () => (
 );
 
 export default PortfolioTitle;
-
