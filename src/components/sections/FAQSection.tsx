@@ -5,6 +5,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import CTABand from "@/components/shared/CTABand";
+import SceneLabel from "@/components/ui/SceneLabel";
 
 const faqItems = [
   {
@@ -68,6 +70,7 @@ const FAQSection = () => {
   return (
     <section id="FAQ" className="relative py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
+        <SceneLabel scene={6} label="שאלות" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,6 +90,15 @@ const FAQSection = () => {
           <FAQColumn items={leftColumn} startIndex={0} />
           <FAQColumn items={rightColumn} startIndex={half} />
         </motion.div>
+
+        <div className="mt-14">
+          <CTABand
+            title="נשארו לכם שאלות? בואו נדבר"
+            subtitle="השאירו פרטים ונחזור אליכם עם כל התשובות — בלי התחייבות."
+            buttonLabel="מוכנים להתחיל? השאירו פרטים"
+            location="faq_section"
+          />
+        </div>
       </div>
     </section>
   );

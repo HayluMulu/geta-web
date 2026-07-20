@@ -323,11 +323,214 @@
     }
   }
 
+  /* ─────────────── CTA BAND — Aurora Ring ─────────────── */
+
+  /* Rotating conic-gradient border that orbits around the CTA card */
+  .aurora-ring {
+    position: relative;
+    border-radius: calc(var(--radius) + 6px);
+    padding: 1.5px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .aurora-ring::before {
+    content: "";
+    position: absolute;
+    inset: -150%;
+    z-index: -1;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      hsl(var(--primary) / 0.9) 40deg,
+      hsl(var(--secondary) / 0.6) 70deg,
+      transparent 110deg,
+      transparent 180deg,
+      hsl(var(--accent) / 0.9) 220deg,
+      hsl(var(--secondary) / 0.6) 250deg,
+      transparent 290deg
+    );
+    animation: aurora-spin 8s linear infinite;
+  }
+
+  .aurora-ring-inner {
+    position: relative;
+    border-radius: calc(var(--radius) + 5px);
+    background: var(--gradient-card);
+    overflow: hidden;
+  }
+
+  @keyframes aurora-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Periodic light sweep across a button surface */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    left: -60%;
+    background: linear-gradient(105deg, transparent, hsl(0 0% 100% / 0.35), transparent);
+    transform: skewX(-20deg);
+    animation: btn-shine-sweep 3.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes btn-shine-sweep {
+    0%,
+    55% {
+      left: -60%;
+    }
+    100% {
+      left: 130%;
+    }
+  }
+
+  /* ─────────────── CINEMATIC LAYER ─────────────── */
+
+  /* Marquee text band — endless film-credit strip */
+  .marquee-band {
+    overflow: hidden;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .marquee-band-track {
+    display: inline-flex;
+    align-items: center;
+    animation: marquee-slide 28s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes marquee-slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Hollow outline text in palette color */
+  .text-outline-cosmic {
+    color: transparent;
+    -webkit-text-stroke: 1.5px hsl(var(--foreground) / 0.22);
+  }
+
+  /* Viewfinder-style scene label */
+  .scene-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: "Space Grotesk", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: hsl(var(--primary) / 0.85);
+    padding: 0.35rem 0.9rem;
+    position: relative;
+  }
+
+  .scene-label::before,
+  .scene-label::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: hsl(var(--primary) / 0.6);
+    border-style: solid;
+  }
+
+  .scene-label::before {
+    top: 0;
+    right: 0;
+    border-width: 1.5px 1.5px 0 0;
+  }
+
+  .scene-label::after {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 1.5px 1.5px;
+  }
+
+  .scene-label-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: hsl(var(--accent));
+    animation: rec-blink 1.6s ease-in-out infinite;
+  }
+
+  @keyframes rec-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  /* Timecode chip — video editor scrubber readout */
+  .timecode-chip {
+    font-family: "Space Grotesk", monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.12em;
+    font-size: 0.68rem;
+    color: hsl(var(--foreground) / 0.75);
+    background: hsl(var(--background) / 0.72);
+    border: 1px solid hsl(var(--primary) / 0.25);
+    border-radius: 6px;
+    padding: 0.28rem 0.6rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Subtle film grain over the whole page */
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+  }
+
   /* Reduced motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
     .title-text-gradient {
       animation: none !important;
       background-position: 0% 50%;
+    }
+
+    .aurora-ring::before {
+      animation: none;
+    }
+
+    .btn-shine::after {
+      animation: none;
+      opacity: 0;
+    }
+
+    .marquee-band-track {
+      animation: none;
+    }
+
+    .scene-label-dot {
+      animation: none;
     }
   }
 }

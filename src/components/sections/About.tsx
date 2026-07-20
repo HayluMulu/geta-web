@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import SceneLabel from "@/components/ui/SceneLabel";
 
 const About = () => {
   return (
@@ -36,6 +37,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6 text-right dir-rtl order-1 lg:order-2">
             <div className="space-y-2">
+              <SceneLabel scene={5} label="מאחורי הקלעים" align="start" />
               <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground leading-tight">
 נעים להכיר אלי גטה 
               </h2>

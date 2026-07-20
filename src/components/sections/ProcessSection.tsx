@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { ClipboardList, Users, Camera, Film } from "lucide-react";
+import SceneLabel from "@/components/ui/SceneLabel";
 
 const steps = [
   {
@@ -25,9 +27,17 @@ const steps = [
 ];
 
 const ProcessSection = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 45%"],
+  });
+  const lineProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
+
   return (
     <section className="relative py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
+        <SceneLabel scene={3} label="התהליך" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,9 +48,19 @@ const ProcessSection = () => {
         </motion.h2>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* Vertical line – hidden on mobile, centered on desktop */}
-          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0" />
+        <div ref={timelineRef} className="relative">
+          {/* Vertical track – hidden on mobile, centered on desktop */}
+          <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-primary/0 via-primary/15 to-primary/0" />
+          {/* Scroll-drawn progress line, like a playhead moving down the timeline */}
+          <motion.div
+            aria-hidden="true"
+            className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] origin-top rounded-full"
+            style={{
+              scaleY: lineProgress,
+              background: "linear-gradient(180deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)))",
+              boxShadow: "0 0 14px hsl(var(--primary) / 0.5)",
+            }}
+          />
 
           <div className="flex flex-col gap-10 md:gap-16">
             {steps.map((step, index) => {
@@ -48,8 +68,14 @@ const ProcessSection = () => {
               // Desktop: even = card right, number left. odd = card left, number right (RTL context)
               return (
                 <div key={step.title} className="relative">
-                  {/* Timeline dot */}
-                  <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-4 h-4 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]" />
+                  {/* Timeline dot — pops as the playhead reaches it */}
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-40% 0px -40% 0px" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 16 }}
+                    className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-4 h-4 rounded-full bg-primary shadow-[0_0_16px_hsl(var(--primary)/0.7)] ring-4 ring-primary/15"
+                  />
 
                   {/* Mobile layout */}
                   <div className="flex flex-col items-center gap-4 md:hidden">

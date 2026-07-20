@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import CTABand from "@/components/shared/CTABand";
 
 const BrandingCTA = () => {
   return (
@@ -36,6 +37,15 @@ const BrandingCTA = () => {
             כנראה שאנחנו הפתרון שחיפשת.
           </p>
         </motion.div>
+
+        <div className="mt-12">
+          <CTABand
+            title="מוכנים לקחת את המיתוג צעד קדימה?"
+            buttonLabel="השאירו פרטים ונחזור אליכם"
+            location="branding_section"
+            trustLine="ללא התחייבות · חוזרים אליך בהקדם"
+          />
+        </div>
       </div>
     </section>
   );
