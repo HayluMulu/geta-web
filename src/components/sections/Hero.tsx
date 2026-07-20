@@ -1,11 +1,4 @@
-import { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  useReducedMotion,
-} from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ViewfinderFrame from "@/components/ui/ViewfinderFrame";
@@ -14,33 +7,18 @@ import { scrollToSection } from "@/hooks/use-scroll-to-section";
 const LINE_ONE = ["הופכים", "תוכן"];
 const LINE_TWO = ["למגנט", "של", "לקוחות"];
 
+/** Entrance only — no blur filters (those force expensive paint on every word). */
 const wordVariants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(14px)", scale: 0.96 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    scale: 1,
-    transition: { duration: 0.75, delay: 0.2 + i * 0.11, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.65, delay: 0.18 + i * 0.1, ease: [0.22, 1, 0.36, 1] },
   }),
 };
 
 const Hero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 50, damping: 20 });
-  const sy = useSpring(my, { stiffness: 50, damping: 20 });
-  const glowX = useTransform(sx, [-0.5, 0.5], ["35%", "65%"]);
-  const glowY = useTransform(sy, [-0.5, 0.5], ["30%", "70%"]);
-
-  const onMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (reduceMotion || !sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
 
   const renderWords = (words: string[], offset: number, className: string) =>
     words.map((word, i) => (
@@ -58,32 +36,21 @@ const Hero = () => {
     ));
 
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={onMove}
-      className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-28 overflow-hidden"
-    >
-      {/* Mouse-reactive nebula glow */}
-      {!reduceMotion && (
-        <motion.div
-          aria-hidden="true"
-          className="absolute w-[55vw] h-[55vw] max-w-[640px] max-h-[640px] rounded-full pointer-events-none blur-[100px] opacity-40"
-          style={{
-            left: glowX,
-            top: glowY,
-            x: "-50%",
-            y: "-50%",
-            background:
-              "radial-gradient(circle, hsl(var(--primary) / 0.35), hsl(var(--secondary) / 0.2), transparent 70%)",
-          }}
-        />
-      )}
+    <section className="relative min-h-screen flex items-center justify-center px-4 md:px-8 py-28 overflow-hidden">
+      {/* Static ambient glow — no mouse tracking (blur + springs were starving the trail) */}
+      <div
+        aria-hidden="true"
+        className="absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 w-[min(70vw,520px)] h-[min(70vw,520px)] rounded-full pointer-events-none opacity-35"
+        style={{
+          background:
+            "radial-gradient(circle, hsl(var(--primary) / 0.28), hsl(var(--secondary) / 0.14), transparent 68%)",
+        }}
+      />
 
       <div className="relative w-full max-w-[1100px] mx-auto z-10">
-        <div className="relative rounded-3xl border border-white/5 bg-background/20 px-5 py-14 md:px-16 md:py-20 backdrop-blur-[2px]">
+        <div className="relative rounded-3xl border border-white/5 bg-background/30 px-5 py-14 md:px-16 md:py-20">
           <ViewfinderFrame live />
 
-          {/* Top bar: REC + take marker */}
           <div className="absolute top-5 left-5 right-5 md:top-7 md:left-10 md:right-10 flex items-center justify-between pointer-events-none z-30">
             <span className="rec-badge" dir="ltr">
               <span className="scene-label-dot" style={{ width: 7, height: 7 }} />
@@ -113,7 +80,7 @@ const Hero = () => {
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.05]">
               {renderWords(LINE_ONE, 0, "text-foreground")}
               <br />
-              {renderWords(LINE_TWO, LINE_ONE.length, "text-gradient-cosmic text-glow")}
+              {renderWords(LINE_TWO, LINE_ONE.length, "text-gradient-cosmic")}
             </h1>
 
             <motion.p
@@ -155,14 +122,16 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Playhead scroll cue */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
           className="mt-10 flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-foreground-muted/60 font-display" dir="ltr">
+          <span
+            className="text-[10px] tracking-[0.3em] uppercase text-foreground-muted/60 font-display"
+            dir="ltr"
+          >
             SCRUB ↓
           </span>
           <motion.div

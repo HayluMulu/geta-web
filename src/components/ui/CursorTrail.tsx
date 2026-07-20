@@ -153,7 +153,7 @@ const CursorTrail = () => {
       ref={canvasRef}
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none hidden md:block"
-      style={{ zIndex: 65 }}
+      style={{ zIndex: 65, transform: "translateZ(0)" }}
     />
   );
 };
