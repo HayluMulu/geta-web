@@ -94,7 +94,7 @@ const FAQSection = () => {
         <div className="mt-14">
           <CTABand
             title="נשארו לכם שאלות? בואו נדבר"
-            subtitle="השאירו פרטים ונחזור אליכם עם כל התשובות — בלי התחייבות."
+            subtitle="השאירו פרטים ונחזור אליכם עם כל התשובות."
             buttonLabel="מוכנים להתחיל? השאירו פרטים"
             location="faq_section"
           />
