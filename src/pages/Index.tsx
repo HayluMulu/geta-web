@@ -1,14 +1,15 @@
 import StarField from "@/components/ui/StarField";
 import GlowOrbs from "@/components/ui/GlowOrbs";
+import ScrollTimecode from "@/components/ui/ScrollTimecode";
+import CursorTrail from "@/components/ui/CursorTrail";
+import MarqueeBand from "@/components/ui/MarqueeBand";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/sections/Hero";
 import BrandingCTA from "@/components/sections/BrandingCTA";
 import ProblemSolutionSection from "@/components/sections/ProblemSolutionSection";
 import PostProblemCTA from "@/components/sections/PostProblemCTA";
 import ProcessSection from "@/components/sections/ProcessSection";
-import SocialProofSection from "@/components/sections/SocialProofSection";
 import About from "@/components/sections/About";
-import FinalCTA from "@/components/sections/FinalCTA";
 import FAQSection from "@/components/sections/FAQSection";
 import Portfolio from "@/components/sections/Portfolio";
 import Contact from "@/components/sections/Contact";
@@ -20,12 +21,17 @@ const Index = () => {
     <div className="relative min-h-screen bg-background overflow-x-hidden">
       <StarField />
       <GlowOrbs />
+      <ScrollTimecode />
+      <CursorTrail />
+      <div className="film-grain" aria-hidden="true" />
 
       <div className="relative z-10">
         <Header />
         <main>
           {/* 1. Hero */}
           <Hero />
+          {/* Film-credit strip */}
+          <MarqueeBand words={["צילום", "עריכה", "מיתוג", "תוכן", "סטוריטלינג", "הפקה"]} />
           {/* 1.5 Branding CTA + Consultation Form */}
           <BrandingCTA />
           {/* 2. Problem & Solution */}
@@ -35,16 +41,18 @@ const Index = () => {
           {/* 3. Process */}
           <ProcessSection />
           {/* 5. Portfolio */}
-          {/* 5. Portfolio */}
           <Portfolio />
           {/* 6. About */}
           <section id="about">
             <About />
           </section>
-          {/* 7. Social Proof
-          <SocialProofSection /> */}
           {/* 8. FAQ */}
           <FAQSection />
+          {/* Film-credit strip before the final act */}
+          <MarqueeBand
+            words={["ACTION", "יצירתיות", "CUT", "דיוק", "PLAY", "תוצאות"]}
+            tilt={1.5}
+          />
           {/* 9. Contact */}
           <Contact />
         </main>

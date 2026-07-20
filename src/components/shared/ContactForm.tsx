@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzzVHDmC6aoy8ptLIPy3SYLM7kQvjJ__bDpPSKIkspO-2MdxOA-J1OsNUVwXWtqRfbi/exec";
@@ -28,15 +29,29 @@ const ContactForm = () => {
 
     if (!trimmedPhone) {
       setPhoneError("חובה להזין מספר טלפון");
+      trackEvent("lead_form_error", {
+        form_id: "contact_form",
+        error_type: "missing_phone",
+      });
       return;
     }
 
     if (!PHONE_REGEX.test(trimmedPhone)) {
       setPhoneError("מספר הטלפון אינו תקין (10 ספרות, למשל: 05XXXXXXXX)");
+      trackEvent("lead_form_error", {
+        form_id: "contact_form",
+        error_type: "invalid_phone",
+      });
       return;
     }
 
-    if (!trimmedName) return;
+    if (!trimmedName) {
+      trackEvent("lead_form_error", {
+        form_id: "contact_form",
+        error_type: "missing_name",
+      });
+      return;
+    }
 
     setIsLoading(true);
     try {
@@ -50,8 +65,16 @@ const ContactForm = () => {
       setPhone("");
       setPhoneError("");
       setIsSuccess(true);
+      trackEvent("generate_lead", {
+        form_id: "contact_form",
+        lead_source: "landing_page",
+      });
     } catch {
       setPhoneError("משהו השתבש, נסה שוב מאוחר יותר.");
+      trackEvent("lead_form_error", {
+        form_id: "contact_form",
+        error_type: "submit_failed",
+      });
     } finally {
       setIsLoading(false);
     }

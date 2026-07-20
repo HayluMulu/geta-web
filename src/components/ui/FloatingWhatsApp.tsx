@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 const WHATSAPP_URL = "https://wa.link/ofhnmb";
 
@@ -34,6 +35,11 @@ const FloatingWhatsApp = () => {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noreferrer"
+        onClick={() =>
+          trackEvent("whatsapp_click", {
+            link_location: "floating_button",
+          })
+        }
         aria-label="צור קשר בוואטסאפ"
         className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 transition-shadow"
         whileHover={{ scale: 1.1 }}

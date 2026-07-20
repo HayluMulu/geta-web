@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Mail, Instagram } from "lucide-react";
 import ContactForm from "@/components/shared/ContactForm";
+import SceneLabel from "@/components/ui/SceneLabel";
+import { trackEvent } from "@/lib/analytics";
 
 const Contact = () => {
   return (
@@ -12,6 +14,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-3xl mb-12">
+          <SceneLabel scene={7} label="הסצנה האחרונה" align="start" />
           <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
             מוכנים לתת לעסק שלכם את ה-
             <span className="title-text-gradient">Show</span> שמגיע לו?
@@ -49,6 +52,11 @@ const Contact = () => {
                   href="https://wa.link/ofhnmb"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() =>
+                    trackEvent("whatsapp_click", {
+                      link_location: "contact_section",
+                    })
+                  }
                   className="flex items-center gap-4 group"
                   aria-label="שלחו הודעה בוואטסאפ">
                   <div className="w-12 h-12 rounded-xl bg-[#25D366]/10 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-all">

@@ -1,9 +1,40 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
 
+const LINE_ONE = ["הופכים", "תוכן"];
+const LINE_TWO = ["למגנט", "של", "לקוחות"];
+
+/** Each word racks into focus like footage — blur, slide, sharpen */
+const wordVariants = {
+  hidden: { opacity: 0, y: 26, filter: "blur(12px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] },
+  }),
+};
+
 const Hero = () => {
+  const reduceMotion = useReducedMotion();
+
+  const renderWords = (words: string[], offset: number, className: string) =>
+    words.map((word, i) => (
+      <motion.span
+        key={word + i}
+        custom={offset + i}
+        variants={reduceMotion ? undefined : wordVariants}
+        initial={reduceMotion ? undefined : "hidden"}
+        animate={reduceMotion ? undefined : "visible"}
+        className={`inline-block ${className}`}
+      >
+        {word}
+        {i < words.length - 1 && <span>&nbsp;</span>}
+      </motion.span>
+    ));
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 py-24">
       <div className="max-w-[1100px] mx-auto w-full relative z-10 text-center">
@@ -19,16 +50,12 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Main Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-          <span className="text-foreground">הופכים תוכן</span>
+        {/* Main Heading — words rack into focus like footage */}
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          {renderWords(LINE_ONE, 0, "text-foreground")}
           <br />
-          <span className="text-gradient-cosmic">למגנט של לקוחות</span>
-        </motion.h1>
+          {renderWords(LINE_TWO, LINE_ONE.length, "text-gradient-cosmic")}
+        </h1>
 
         {/* Subheading */}
         <motion.p

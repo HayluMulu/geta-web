@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
+import SceneLabel from "@/components/ui/SceneLabel";
 
 const problems = [
   "לא עוד יום צילום אחד בשביל סרטון בודד",
@@ -19,6 +20,7 @@ const ProblemSolutionSection = () => {
   return (
     <section className="relative py-24 px-6">
       <div className="max-w-[1100px] mx-auto">
+        <SceneLabel scene={2} label="הבעיה" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

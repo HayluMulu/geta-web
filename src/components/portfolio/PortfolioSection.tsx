@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import { useVideoRegistry } from "@/hooks/use-video-registry";
+import SceneLabel from "@/components/ui/SceneLabel";
 
 import { projects } from "./portfolio.data";
 import PortfolioMarquee from "./PortfolioMarquee";
@@ -80,6 +81,7 @@ const PortfolioSection = () => {
       className="relative py-24 overflow-hidden"
     >
       <div className="container relative z-10 px-6">
+        <SceneLabel scene={4} label="העבודות" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
