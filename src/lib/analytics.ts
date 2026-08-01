@@ -47,12 +47,11 @@ export const initAnalytics = () => {
   document.head.appendChild(script);
 
   window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID, {
-    send_page_view: false,
-  });
+  // Fallback path: let gtag send the first page view itself
+  window.gtag("config", GA_MEASUREMENT_ID);
 };
 
-/** Track a virtual page view (SPA route changes). */
+/** Track a virtual page view (SPA route changes after first load). */
 export const trackPageView = (path: string, title?: string) => {
   const pagePath = path || "/";
   const pageTitle = title || document.title;
@@ -65,6 +64,7 @@ export const trackPageView = (path: string, title?: string) => {
   if (!GA_MEASUREMENT_ID || !window.gtag) return;
 
   window.gtag("event", "page_view", {
+    send_to: GA_MEASUREMENT_ID,
     page_path: pagePath,
     page_title: pageTitle,
     page_location: window.location.href,
@@ -79,7 +79,10 @@ export const trackEvent = (eventName: string, params: AnalyticsParams = {}) => {
 
   if (!GA_MEASUREMENT_ID || !window.gtag) return;
 
-  window.gtag("event", eventName, params);
+  window.gtag("event", eventName, {
+    send_to: GA_MEASUREMENT_ID,
+    ...params,
+  });
 };
 
 export { GA_MEASUREMENT_ID };

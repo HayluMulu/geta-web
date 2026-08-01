@@ -21,7 +21,8 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-YS07DJEEEC', { send_page_view: false });
+      // send_page_view must stay true — otherwise only the SPA tracker can register visits
+      gtag('config', 'G-YS07DJEEEC');
     </script>
   </head>
 
