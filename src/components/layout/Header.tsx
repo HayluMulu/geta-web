@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
+import { trackCtaClick, trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { label: "אודות", id: "about" },
@@ -23,6 +24,11 @@ const Header = () => {
 
   const handleNavClick = (id: string) => {
     setMobileOpen(false);
+    if (id === "contact") {
+      trackCtaClick("header_nav", "צור קשר");
+    } else {
+      trackEvent("nav_click", { nav_id: id });
+    }
     scrollToSection(id);
   };
 

@@ -27,7 +27,7 @@ const PostProblemCTA = () => {
           onMouseMove={setSpotlight}
           className="card-cosmic card-spotlight p-6 md:p-8 border-primary/15"
         >
-          <ContactForm />
+          <ContactForm formId="mid_page_form" />
         </motion.div>
       </div>
     </section>

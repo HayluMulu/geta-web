@@ -3,6 +3,7 @@ import { Sparkles } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import ViewfinderFrame from "@/components/ui/ViewfinderFrame";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
+import { trackCtaClick, trackEvent } from "@/lib/analytics";
 
 const LINE_ONE = ["הופכים", "תוכן"];
 const LINE_TWO = ["למגנט", "של", "לקוחות"];
@@ -104,7 +105,10 @@ const Hero = () => {
                 size="lg"
                 className="group h-14 px-10 text-base font-bold"
                 aria-label="קבע שיחת ייעוץ חינם"
-                onClick={() => scrollToSection("contact")}
+                onClick={() => {
+                  trackCtaClick("hero", "קבע שיחת ייעוץ חינם");
+                  scrollToSection("contact");
+                }}
               >
                 קבע שיחת ייעוץ חינם
               </MagneticButton>
@@ -114,7 +118,13 @@ const Hero = () => {
                 className="h-14 px-10"
                 strength={0.22}
                 aria-label="צפו בעבודות שלנו"
-                onClick={() => scrollToSection("portfolio")}
+                onClick={() => {
+                  trackEvent("cta_click", {
+                    cta_location: "hero",
+                    cta_label: "צפו בעבודות שלנו",
+                  });
+                  scrollToSection("portfolio");
+                }}
               >
                 צפו בעבודות שלנו
               </MagneticButton>

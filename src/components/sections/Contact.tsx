@@ -4,7 +4,7 @@ import ContactForm from "@/components/shared/ContactForm";
 import SceneLabel from "@/components/ui/SceneLabel";
 import RevealLine from "@/components/ui/RevealLine";
 import ScrollDriftText from "@/components/ui/ScrollDriftText";
-import { trackEvent } from "@/lib/analytics";
+import { trackContactClick } from "@/lib/analytics";
 
 const setSpotlight = (e: React.MouseEvent<HTMLDivElement>) => {
   const el = e.currentTarget;
@@ -55,7 +55,7 @@ const Contact = () => {
                 ROLL CAMERA
               </span>
             </div>
-            <ContactForm />
+            <ContactForm formId="contact_section_form" />
           </motion.div>
 
           <motion.div
@@ -72,9 +72,7 @@ const Contact = () => {
                   href="https://wa.link/ofhnmb"
                   target="_blank"
                   rel="noreferrer"
-                  onClick={() =>
-                    trackEvent("whatsapp_click", { link_location: "contact_section" })
-                  }
+                  onClick={() => trackContactClick("whatsapp", "contact_section")}
                   className="flex items-center gap-4 group card-cosmic p-4 border-transparent hover:border-[#25D366]/30"
                   aria-label="שלחו הודעה בוואטסאפ"
                 >
@@ -102,6 +100,7 @@ const Contact = () => {
                   href="https://katzr.net/5e0c54"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackContactClick("instagram", "contact_section")}
                   className="flex items-center gap-4 group card-cosmic p-4 border-transparent hover:border-[#E4405F]/30"
                   aria-label="עקבו אחרינו באינסטגרם"
                 >
@@ -118,6 +117,7 @@ const Contact = () => {
 
                 <a
                   href="mailto:getashow123@gmail.com"
+                  onClick={() => trackContactClick("email", "contact_section")}
                   className="flex items-center gap-4 group card-cosmic p-4 border-transparent hover:border-primary/30"
                   aria-label="שלחו אימייל"
                 >

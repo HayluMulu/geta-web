@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { scrollToSection } from "@/hooks/use-scroll-to-section";
-import { trackEvent } from "@/lib/analytics";
+import { trackCtaClick } from "@/lib/analytics";
 
 type CTABandProps = {
   title: string;
@@ -17,7 +17,7 @@ const CTABand = ({ title, subtitle, buttonLabel, location, trustLine }: CTABandP
   const reduceMotion = useReducedMotion();
 
   const handleClick = () => {
-    trackEvent("cta_click", { cta_location: location, cta_label: buttonLabel });
+    trackCtaClick(location, buttonLabel);
     scrollToSection("contact");
   };
 

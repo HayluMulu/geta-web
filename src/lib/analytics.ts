@@ -85,4 +85,51 @@ export const trackEvent = (eventName: string, params: AnalyticsParams = {}) => {
   });
 };
 
+const LAST_CTA_KEY = "geta_last_cta";
+
+type LastCta = {
+  cta_location: string;
+  cta_label: string;
+};
+
+/** Remember the last CTA click in this tab (used when a lead form submits). */
+export const rememberCta = (cta_location: string, cta_label: string) => {
+  try {
+    const payload: LastCta = { cta_location, cta_label };
+    sessionStorage.setItem(LAST_CTA_KEY, JSON.stringify(payload));
+  } catch {
+    // private mode / blocked storage — attribution is best-effort
+  }
+};
+
+export const getLastCta = (): LastCta | null => {
+  try {
+    const raw = sessionStorage.getItem(LAST_CTA_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as LastCta;
+    if (!parsed?.cta_location) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+};
+
+/** CTA click + store attribution for later generate_lead. */
+export const trackCtaClick = (cta_location: string, cta_label: string) => {
+  rememberCta(cta_location, cta_label);
+  trackEvent("cta_click", { cta_location, cta_label });
+};
+
+type ContactChannel = "whatsapp" | "instagram" | "email";
+
+/** Outbound contact channel click (sticky WA, contact cards, footer). */
+export const trackContactClick = (channel: ContactChannel, link_location: string) => {
+  rememberCta(link_location, channel);
+  trackEvent("contact_click", { channel, link_location });
+  // Keep dedicated WhatsApp event for existing GA reports / conversions
+  if (channel === "whatsapp") {
+    trackEvent("whatsapp_click", { link_location });
+  }
+};
+
 export { GA_MEASUREMENT_ID };
