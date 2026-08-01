@@ -7,24 +7,15 @@ declare global {
   }
 }
 
-/** Public GA4 Measurement ID (safe to ship to the client). */
+/** Public GA4 Measurement ID (also hard-coded in index.html for Netlify). */
 const GA_MEASUREMENT_ID =
   import.meta.env.VITE_GA_MEASUREMENT_ID || "G-YS07DJEEEC";
 
 const isDev = import.meta.env.DEV;
 
-const ensureGtag = () => {
-  window.dataLayer = window.dataLayer || [];
-  if (!window.gtag) {
-    window.gtag = (...args: unknown[]) => {
-      window.dataLayer?.push(args);
-    };
-  }
-};
-
 /**
- * Loads the official Google tag (gtag.js) once and configures GA4.
- * Automatic page_view is disabled so React Router can own SPA navigation.
+ * Ensures gtag exists. Prefer the snippet in index.html (production/Netlify).
+ * Falls back to injecting the script if HTML tag is missing.
  */
 export const initAnalytics = () => {
   if (!GA_MEASUREMENT_ID) return;
@@ -36,18 +27,27 @@ export const initAnalytics = () => {
     return;
   }
 
-  if (document.getElementById("ga4-gtag")) return;
+  window.dataLayer = window.dataLayer || [];
+  if (!window.gtag) {
+    window.gtag = (...args: unknown[]) => {
+      window.dataLayer?.push(args);
+    };
+  }
 
-  ensureGtag();
+  // HTML already loaded gtag — nothing else to do
+  if (document.getElementById("ga4-gtag") || document.querySelector(`script[src*="gtag/js?id=${GA_MEASUREMENT_ID}"]`)) {
+    return;
+  }
 
+  // Fallback inject (e.g. if index.html snippet was stripped)
   const script = document.createElement("script");
   script.id = "ga4-gtag";
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   document.head.appendChild(script);
 
-  window.gtag!("js", new Date());
-  window.gtag!("config", GA_MEASUREMENT_ID, {
+  window.gtag("js", new Date());
+  window.gtag("config", GA_MEASUREMENT_ID, {
     send_page_view: false,
   });
 };
